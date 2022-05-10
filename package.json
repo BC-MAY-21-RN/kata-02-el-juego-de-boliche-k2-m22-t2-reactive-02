@@ -2,7 +2,7 @@
   "name": "kata-02-el-juego-de-boliche-k2-m22-t2-reactive-02",
   "version": "1.0.0",
   "description": "![BrightCoders Logo](img/logo-bc.png)",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "test": "jest"
   },
