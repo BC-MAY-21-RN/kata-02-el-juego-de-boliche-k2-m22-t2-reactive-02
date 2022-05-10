@@ -19,6 +19,14 @@ class Frame {
     this.tiro2 = tiro2
   }
 
+  setNodoSiguiente (nodo) {
+    this.nodosiguiente = nodo
+  }
+
+  setNodoAnterior (nodo) {
+    this.nodoanterior = nodo
+  }
+
   getTiro1 () {
     return this.tiro1
   }
@@ -26,6 +34,18 @@ class Frame {
   getTiro2 () {
     return this.tiro2
   }
+
+  getNodoAnterior () {
+    return this.nodoanterior
+  }
+
+  getNodoSiguiente () {
+    return this.nodosiguiente
+  }
+
+  getPuntuacionFinal () {
+    return this.puntuacionFinal
+  }
 }
 
-export default Frame
+module.exports = Frame
