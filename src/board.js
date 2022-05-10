@@ -15,44 +15,38 @@ class Board {
     return this.primerNodo
   }
 
+  // TODO: falta verificar si es strike o spare
   setPuntuacionPrimerTiro (puntuacion) {
     this.nodoActual.setTiro1(puntuacion)
+    if (this.nodoActual.getNodoAnterior() != null) {
+      if (this.nodoActual.getNodoAnterior().getPuntuacionFinal() === 10) {
+        this.nodoActual.getNodoAnterior().setBonificacion(puntuacion)
+      }
+    }
   }
 
   setPuntuacionSegundoTiro (puntuacion) {
     this.nodoActual.setTiro2(puntuacion)
     if (this.nodoActual.getNodoSiguiente() != null) {
       this.nodoActual = this.nodoActual.getNodoSiguiente()
+    } else {
+      // Ultimo frame
     }
   }
 
-  agregarFrame (tiro1, tiro2) {
-    if (this.primerNodo == null) { // Si el primer nodo es null entonces no hay lista enlazada
-      this.primerNodo = new Frame(null, null)
-      this.primerNodo.setTiro1(tiro1)
-      this.primerNodo.sumaPuntuacionFinal(tiro1)
-      this.primerNodo.setTiro2(tiro2)
-      this.primerNodo.sumaPuntuacionFinal(tiro2)
-    } else {
-      // Si el primer nodo es diferente de null entonces se agrega otro nodo
-      let aux = this.primerNodo
-      // var nuevoNodo = new Frame(null,null) //nodo que se agrega a la lista
-      while (aux.getNodoSiguiente() != null) {
-        aux = aux.getNodoSiguiente()
-      }
-      // se agrega un nodo al atributo nodosiguiente con un nuevo nodo
-      aux.setNodoSiguiente(new Frame(aux, null))
+  toString () {
+    const topEdge = '+----+----+'.repeat(10)
+    const middle = '|    +----|'.repeat(10)
+    const bottomEdge = '+---------+'.repeat(10)
+    let shootsString = ''
+    let scoreString = ''
+    let aux = this.primerNodo
+    while (aux != null) {
+      shootsString += aux.getShootsString()
+      scoreString += aux.getScoreString()
       aux = aux.getNodoSiguiente()
-      // agrega los tiros al nodo y verifica la puntuacion anterior
-      if ((aux.getNodoAnterior().getTiro1() + aux.getNodoAnterior().getTiro2()) === 10) {
-        aux.getNodoAnterior().sumaPuntuacionFinal(tiro1)
-      }
-      aux.sumaPuntuacionFinal(aux.getNodoAnterior().getPuntuacionFinal())
-      aux.setTiro1(tiro1)
-      aux.sumaPuntuacionFinal(tiro1)
-      aux.setTiro2(tiro2)
-      aux.sumaPuntuacionFinal(tiro2)
     }
+    return topEdge + '\n' + shootsString + '\n' + middle + '\n' + scoreString + '\n' + bottomEdge
   }
 }
 
