@@ -1,0 +1,28 @@
+{
+  "name": "kata-02-el-juego-de-boliche-k2-m22-t2-reactive-02",
+  "version": "1.0.0",
+  "description": "![BrightCoders Logo](img/logo-bc.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BC-MAY-21-RN/kata-02-el-juego-de-boliche-k2-m22-t2-reactive-02.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BC-MAY-21-RN/kata-02-el-juego-de-boliche-k2-m22-t2-reactive-02/issues"
+  },
+  "homepage": "https://github.com/BC-MAY-21-RN/kata-02-el-juego-de-boliche-k2-m22-t2-reactive-02#readme",
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "jest": "^28.1.0",
+    "prettier-eslint": "^14.0.2"
+  }
+}
