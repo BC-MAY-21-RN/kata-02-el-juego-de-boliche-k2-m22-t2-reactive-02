@@ -93,19 +93,20 @@ class Frame {
   }
 
   getShootsString (isLastFrame = false) {
+    let str
     if (this.isStrike()) {
       if (isLastFrame) {
-        return `| ${this.tiro1.toString().padStart(2, ' ')} |  X | ${this.tiro3}`
+        str = `| ${this.tiro1.toString().padStart(2, ' ')} |  X | ${this.tiro3}`
       }
-      return `| ${this.tiro1.toString().padStart(2, ' ')} |  X |`
+      str = `| ${this.tiro1.toString().padStart(2, ' ')} |  X |`
     }
     if (this.isSpare()) {
       if (isLastFrame) {
-        return `| ${this.tiro1.toString().padStart(2, ' ')} |  / | ${this.tiro3}`
+        str = `| ${this.tiro1.toString().padStart(2, ' ')} |  / | ${this.tiro3}`
       }
-      return `| ${this.tiro1.toString().padStart(2, ' ')} |  / |`
+      str = `| ${this.tiro1.toString().padStart(2, ' ')} |  / |`
     }
-    return `| ${this.tiro1.toString().padStart(2, ' ')} | ${this.tiro2.toString().padStart(2, ' ')} |`
+    return str ?? `| ${this.tiro1.toString().padStart(2, ' ')} | ${this.tiro2.toString().padStart(2, ' ')} |`
   }
 
   getScoreString () {
