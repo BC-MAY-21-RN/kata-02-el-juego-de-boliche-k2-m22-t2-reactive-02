@@ -62,9 +62,9 @@ class Frame {
   }
 
   getPuntuacionFinal () {
-    if (this.tiro1 === 0) {
-      return 0
-    }
+    // if (this.tiro1 === 0) {
+    //   return 0
+    // }
     let puntuacionAnterior = 0
     if (this.nodoanterior != null) {
       puntuacionAnterior = this.nodoanterior.getPuntuacionFinal()
@@ -93,20 +93,19 @@ class Frame {
   }
 
   getShootsString (isLastFrame = false) {
-    let str
+    let firstShootString = this.tiro1.toString().padStart(2, ' ')
+    let secondShootString = this.tiro2.toString().padStart(2, ' ')
     if (this.isStrike()) {
-      if (isLastFrame) {
-        str = `| ${this.tiro1.toString().padStart(2, ' ')} |  X | ${this.tiro3}`
-      }
-      str = `| ${this.tiro1.toString().padStart(2, ' ')} |  X |`
+      firstShootString = '  '
+      secondShootString = ' X'
+    } else if (this.isSpare()) {
+      secondShootString = ' /'
     }
-    if (this.isSpare()) {
-      if (isLastFrame) {
-        str = `| ${this.tiro1.toString().padStart(2, ' ')} |  / | ${this.tiro3}`
-      }
-      str = `| ${this.tiro1.toString().padStart(2, ' ')} |  / |`
+    let str = `| ${firstShootString} | ${secondShootString} |`
+    if (isLastFrame && (this.isSpare() || this.isStrike())) {
+      str = `${str} ${this.tiro3}`
     }
-    return str ?? `| ${this.tiro1.toString().padStart(2, ' ')} | ${this.tiro2.toString().padStart(2, ' ')} |`
+    return str
   }
 
   getScoreString () {
