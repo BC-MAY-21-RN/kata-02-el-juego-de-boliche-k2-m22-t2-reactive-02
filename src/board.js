@@ -33,15 +33,15 @@ class Board {
   }
 
   setPuntuacionTercerTiro (puntuacion) {
-    if (this.nodoActual.getNodoSiguiente() == null && (this.nodoActual.getNodoAnterior().isSpare() || this.nodoActual.getNodoAnterior().isStrike())) {
+    if (this.nodoActual.getNodoSiguiente() == null && (this.nodoActual.isSpare() || this.nodoActual.isStrike())) {
       this.nodoActual.setTiro3(puntuacion)
     }
   }
 
   toString () {
-    const topEdge = '+----+----+'.repeat(10)
-    const middle = '|    +----|'.repeat(10)
-    const bottomEdge = '+---------+'.repeat(10)
+    let topEdge = '+----+----+'.repeat(10)
+    let middle = '|    +----|'.repeat(10)
+    let bottomEdge = '+---------+'.repeat(10)
     let shootsString = ''
     let scoreString = ''
     let aux = this.primerNodo
@@ -49,6 +49,12 @@ class Board {
       const isLastFrame = aux.getNodoSiguiente() == null
       shootsString += aux.getShootsString(isLastFrame)
       scoreString += aux.getScoreString()
+      if (isLastFrame && (aux.isStrike() || aux.isSpare())) {
+        topEdge += '----+'
+        bottomEdge = bottomEdge.substring(0, bottomEdge.length - 1) + '-----+'
+        middle = middle.substring(0, middle.length - 1) + '+----+'
+        scoreString = scoreString.substring(0, scoreString.length - 1) + '     |'
+      }
       aux = aux.getNodoSiguiente()
     }
     return topEdge + '\n' + shootsString + '\n' + middle + '\n' + scoreString + '\n' + bottomEdge

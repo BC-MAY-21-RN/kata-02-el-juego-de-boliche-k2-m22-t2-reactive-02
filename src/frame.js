@@ -103,7 +103,7 @@ class Frame {
     }
     let str = `| ${firstShootString} | ${secondShootString} |`
     if (isLastFrame && (this.isSpare() || this.isStrike())) {
-      str = `${str} ${this.tiro3}`
+      str = `${str} ${this.tiro3.toString().padStart(2, ' ')} |`
     }
     return str
   }
