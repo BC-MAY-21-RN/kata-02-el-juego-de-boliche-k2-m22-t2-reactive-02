@@ -29,8 +29,12 @@ class Board {
     this.nodoActual.setTiro2(puntuacion)
     if (this.nodoActual.getNodoSiguiente() != null) {
       this.nodoActual = this.nodoActual.getNodoSiguiente()
-    } else {
-      // Ultimo frame
+    }
+  }
+
+  setPuntuacionTercerTiro (puntuacion) {
+    if (this.nodoActual.getNodoSiguiente() == null && (this.nodoActual.getNodoAnterior().isSpare() || this.nodoActual.getNodoAnterior().isStrike())) {
+      this.nodoActual.setTiro3(puntuacion)
     }
   }
 
@@ -42,7 +46,8 @@ class Board {
     let scoreString = ''
     let aux = this.primerNodo
     while (aux != null) {
-      shootsString += aux.getShootsString()
+      const isLastFrame = aux.getNodoSiguiente() == null
+      shootsString += aux.getShootsString(isLastFrame)
       scoreString += aux.getScoreString()
       aux = aux.getNodoSiguiente()
     }

@@ -69,7 +69,7 @@ class Frame {
     if (this.nodoanterior != null) {
       puntuacionAnterior = this.nodoanterior.getPuntuacionFinal()
     }
-    return this.tiro1 + this.tiro2 + this.bonificacion + puntuacionAnterior
+    return this.tiro1 + this.tiro2 + this.tiro3 + this.bonificacion + puntuacionAnterior
   }
 
   getBonificacion () {
@@ -92,11 +92,17 @@ class Frame {
     return (this.tiro1 + this.tiro2) === 10
   }
 
-  getShootsString () {
+  getShootsString (isLastFrame = false) {
     if (this.isStrike()) {
+      if (isLastFrame) {
+        return `| ${this.tiro1.toString().padStart(2, ' ')} |  X | ${this.tiro3}`
+      }
       return `| ${this.tiro1.toString().padStart(2, ' ')} |  X |`
     }
     if (this.isSpare()) {
+      if (isLastFrame) {
+        return `| ${this.tiro1.toString().padStart(2, ' ')} |  / | ${this.tiro3}`
+      }
       return `| ${this.tiro1.toString().padStart(2, ' ')} |  / |`
     }
     return `| ${this.tiro1.toString().padStart(2, ' ')} | ${this.tiro2.toString().padStart(2, ' ')} |`
