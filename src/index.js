@@ -5,7 +5,7 @@ const board = new Board()
 const generateShoot = (firstResult) => {
   let max = 10
   if (firstResult) {
-    max = firstResult
+    max = 10 - firstResult
   }
   return Math.floor(Math.random() * (max + 1))
 }
