@@ -24,6 +24,7 @@ describe('Board class test', () => {
   })
   test('setPuntuacionSegundoTiro function', () => {
     const board = new Board()
+    board.setPuntuacionPrimerTiro(0)
     board.setPuntuacionSegundoTiro(10)
     const puntuacion = board.getPrimerNodo().getPuntuacionFinal()
     expect(puntuacion).toBe(10)
