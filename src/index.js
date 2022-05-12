@@ -14,11 +14,24 @@ const generateShoot = (firstResult) => {
 for (let index = 0; index < 10; index++) {
   const firstShoot = generateShoot()
   board.setPuntuacionPrimerTiro(firstShoot)
-  const secondShoot = generateShoot(firstShoot)
-  board.setPuntuacionSegundoTiro(secondShoot)
-  if (index === 9) {
-    const thirdShoot = generateShoot()
-    board.setPuntuacionTercerTiro(thirdShoot)
+  if (firstShoot !== 10) {
+    const secondShoot = generateShoot(firstShoot)
+    board.setPuntuacionSegundoTiro(secondShoot)
+    if ((firstShoot + secondShoot === 10) && index === 9) {
+      const thirdShoot = generateShoot()
+      board.setPuntuacionTercerTiro(thirdShoot)
+    }
+  } else {
+    if (index === 9) {
+      const secondShoot = generateShoot(firstShoot)
+      board.setPuntuacionSegundoTiro(secondShoot)
+      if (secondShoot === 10 && index === 9) {
+        const thirdShoot = generateShoot()
+        board.setPuntuacionTercerTiro(thirdShoot)
+      }
+    } else {
+      board.setPuntuacionSegundoTiro(0)
+    }
   }
 }
 

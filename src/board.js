@@ -18,11 +18,11 @@ class Board {
   // TODO: falta verificar si es strike o spare
   setPuntuacionPrimerTiro (puntuacion) {
     this.nodoActual.setTiro1(puntuacion)
-    if (this.nodoActual.getNodoAnterior() != null) {
-      if (this.nodoActual.getNodoAnterior().getPuntuacionFinal() === 10) {
-        this.nodoActual.getNodoAnterior().setBonificacion(puntuacion)
-      }
-    }
+    // if (this.nodoActual.getNodoAnterior() != null) {
+    //   if (this.nodoActual.getNodoAnterior().getPuntuacionFinal() === 10) {
+    //     this.nodoActual.getNodoAnterior().setBonificacion(puntuacion)
+    //   }
+    // }
   }
 
   setPuntuacionSegundoTiro (puntuacion) {
@@ -33,7 +33,10 @@ class Board {
   }
 
   setPuntuacionTercerTiro (puntuacion) {
-    if (this.nodoActual.getNodoSiguiente() == null && (this.nodoActual.isSpare() || this.nodoActual.isStrike())) {
+    if (
+      this.nodoActual.getNodoSiguiente() == null &&
+      (this.nodoActual.isSpare() || this.nodoActual.isStrike())
+    ) {
       this.nodoActual.setTiro3(puntuacion)
     }
   }
@@ -53,11 +56,32 @@ class Board {
         topEdge += '----+'
         bottomEdge = bottomEdge.substring(0, bottomEdge.length - 1) + '-----+'
         middle = middle.substring(0, middle.length - 1) + '+----+'
-        scoreString = scoreString.substring(0, scoreString.length - 1) + '     |'
+        scoreString =
+          scoreString.substring(0, scoreString.length - 1) + '     |'
       }
       aux = aux.getNodoSiguiente()
     }
-    return topEdge + '\n' + shootsString + '\n' + middle + '\n' + scoreString + '\n' + bottomEdge
+    return (
+      topEdge +
+      '\n' +
+      shootsString +
+      '\n' +
+      middle +
+      '\n' +
+      scoreString +
+      '\n' +
+      bottomEdge
+    )
+  }
+
+  getPuntuacionFinal () {
+    let contador = 0
+    let nodoAux = this.primerNodo
+    while (nodoAux != null) {
+      contador = nodoAux.getPuntuacionFinal()
+      nodoAux = nodoAux.getNodoSiguiente()
+    }
+    return contador
   }
 }
 

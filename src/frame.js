@@ -3,10 +3,10 @@ class Frame {
     this.tiro1 = 0
     this.tiro2 = 0
     this.tiro3 = 0
-    this.bonificacion = 0
+    // this.bonificacion = 0
     this.puntuacionFinal = 0
     this.nodoanterior = nodoAnterior
-    this.nodosiguiente = nodoSiguiente
+    this.nodoSiguiente = nodoSiguiente
   }
 
   sumaPuntuacionFinal (tiro) {
@@ -26,16 +26,16 @@ class Frame {
   }
 
   setNodoSiguiente (nodo) {
-    this.nodosiguiente = nodo
+    this.nodoSiguiente = nodo
   }
 
   setNodoAnterior (nodo) {
     this.nodoanterior = nodo
   }
 
-  setBonificacion (bonificacon) {
-    this.bonificacion = bonificacon
-  }
+  // setBonificacion (bonificacon) {
+  //   this.bonificacion = bonificacon
+  // }
 
   getTiro1 () {
     return this.tiro1
@@ -58,23 +58,47 @@ class Frame {
   }
 
   getNodoSiguiente () {
-    return this.nodosiguiente
+    return this.nodoSiguiente
   }
 
   getPuntuacionFinal () {
-    // if (this.tiro1 === 0) {
-    //   return 0
-    // }
     let puntuacionAnterior = 0
     if (this.nodoanterior != null) {
       puntuacionAnterior = this.nodoanterior.getPuntuacionFinal()
     }
-    return this.tiro1 + this.tiro2 + this.tiro3 + this.bonificacion + puntuacionAnterior
+    let bonificacion = 0
+    if (this.nodoSiguiente != null) {
+      if (this.isStrike()) {
+        if (this.nodoSiguiente.isStrike()) {
+          // Si el nodo siguiente es strike entonces se sumara el tiro 1
+          bonificacion += this.nodoSiguiente.getTiro1()
+          if (this.nodoSiguiente.getNodoSiguiente() != null) {
+            // Si el nodo siguiente del nodo siguiente no es nulo entonces se sumara el tiro 1
+            bonificacion += this.nodoSiguiente.getNodoSiguiente().getTiro1()
+          } else {
+            bonificacion += 10
+          }
+        } else {
+          bonificacion = this.nodoSiguiente.getTiro1() + this.nodoSiguiente.getTiro2()
+        }
+
+        // bonificacion = this.nodoSiguiente.getTiro1() + this.nodoSiguiente.getTiro2()
+      } else if (this.isSpare()) {
+        bonificacion = this.nodoSiguiente.getTiro1()
+      }
+    } else if (this.isStrike()) {
+      bonificacion += this.getTiro2()
+    }
+    let sumTiro2 = this.tiro2
+    if (this.isStrike()) {
+      sumTiro2 = 0
+    }
+    return this.tiro1 + sumTiro2 + this.tiro3 + bonificacion + puntuacionAnterior
   }
 
-  getBonificacion () {
-    return this.bonificacion
-  }
+  // getBonificacion () {
+  //   return this.bonificacion
+  // }
 
   /**
    * Returns true if the current frame is a strike
