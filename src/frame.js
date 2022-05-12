@@ -70,10 +70,8 @@ class Frame {
     if (this.nodoSiguiente != null) {
       if (this.isStrike()) {
         if (this.nodoSiguiente.isStrike()) {
-          // Si el nodo siguiente es strike entonces se sumara el tiro 1
           bonificacion += this.nodoSiguiente.getTiro1()
           if (this.nodoSiguiente.getNodoSiguiente() != null) {
-            // Si el nodo siguiente del nodo siguiente no es nulo entonces se sumara el tiro 1
             bonificacion += this.nodoSiguiente.getNodoSiguiente().getTiro1()
           } else {
             bonificacion += 10
@@ -81,8 +79,6 @@ class Frame {
         } else {
           bonificacion = this.nodoSiguiente.getTiro1() + this.nodoSiguiente.getTiro2()
         }
-
-        // bonificacion = this.nodoSiguiente.getTiro1() + this.nodoSiguiente.getTiro2()
       } else if (this.isSpare()) {
         bonificacion = this.nodoSiguiente.getTiro1()
       }

@@ -56,22 +56,11 @@ class Board {
         topEdge += '----+'
         bottomEdge = bottomEdge.substring(0, bottomEdge.length - 1) + '-----+'
         middle = middle.substring(0, middle.length - 1) + '+----+'
-        scoreString =
-          scoreString.substring(0, scoreString.length - 1) + '     |'
+        scoreString = scoreString.substring(0, scoreString.length - 1) + '     |'
       }
       aux = aux.getNodoSiguiente()
     }
-    return (
-      topEdge +
-      '\n' +
-      shootsString +
-      '\n' +
-      middle +
-      '\n' +
-      scoreString +
-      '\n' +
-      bottomEdge
-    )
+    return topEdge + '\n' + shootsString + '\n' + middle + '\n' + scoreString + '\n' + bottomEdge
   }
 
   getPuntuacionFinal () {
