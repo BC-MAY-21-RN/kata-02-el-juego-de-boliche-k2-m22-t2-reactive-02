@@ -63,9 +63,7 @@ class Frame {
 
   getPuntuacionFinal () {
     let puntuacionAnterior = 0
-    if (this.nodoanterior != null) {
-      puntuacionAnterior = this.nodoanterior.getPuntuacionFinal()
-    }
+    puntuacionAnterior = this.nodoanterior?.getPuntuacionFinal() ?? 0
     let bonificacion = 0
     if (this.nodoSiguiente != null) {
       if (this.isStrike()) {
@@ -73,22 +71,12 @@ class Frame {
           bonificacion += this.nodoSiguiente.getTiro1()
           if (this.nodoSiguiente.getNodoSiguiente() != null) {
             bonificacion += this.nodoSiguiente.getNodoSiguiente().getTiro1()
-          } else {
-            bonificacion += 10
-          }
-        } else {
-          bonificacion = this.nodoSiguiente.getTiro1() + this.nodoSiguiente.getTiro2()
-        }
-      } else if (this.isSpare()) {
-        bonificacion = this.nodoSiguiente.getTiro1()
-      }
-    } else if (this.isStrike()) {
-      bonificacion += this.getTiro2()
-    }
+          } else bonificacion += 10
+        } else bonificacion = this.nodoSiguiente.getTiro1() + this.nodoSiguiente.getTiro2()
+      } else if (this.isSpare()) bonificacion = this.nodoSiguiente.getTiro1()
+    } else if (this.isStrike()) bonificacion += this.getTiro2()
     let sumTiro2 = this.tiro2
-    if (this.isStrike()) {
-      sumTiro2 = 0
-    }
+    if (this.isStrike()) sumTiro2 = 0
     return this.tiro1 + sumTiro2 + this.tiro3 + bonificacion + puntuacionAnterior
   }
 
